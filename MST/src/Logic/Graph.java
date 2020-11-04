@@ -14,4 +14,12 @@ public class Graph {
 	public ArrayList<Vertex> getGraph() {
 		return graph;
 	}
+	
+	public int size() {
+		return graph.size();
+	}
+	
+	public ArrayList<Vertex> getEdges(Vertex v) {
+		return v.getEdges();
+	}
 }

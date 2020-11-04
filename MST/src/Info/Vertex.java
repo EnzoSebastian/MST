@@ -1,5 +1,6 @@
 package Info;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Vertex {
@@ -13,6 +14,14 @@ public class Vertex {
 	
 	public Person getPerson() {
 		return person;
+	}
+	
+	public ArrayList<Vertex> getEdges() {
+		ArrayList<Vertex> allEdges = new ArrayList<>();
+		for (Vertex vertex : edges.keySet()) {
+			allEdges.add(vertex);
+		}
+		return allEdges;
 	}
 	
 	public int getEdgeSimilarityIndex(Vertex v) {
