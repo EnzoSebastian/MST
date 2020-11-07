@@ -21,7 +21,6 @@ public class MST {
 	private static ArrayList<Vertex> prim(Graph graph) {
 		Set<Vertex> vertex = new HashSet<Vertex>();
 		vertex.add(graph.getGraph().get(0));
-		//Set<Vertex> edges = new HashSet<>();
 		Graph copy = new Graph();
 		int i = 1;
 		while(i <= graph.size()-1) {
