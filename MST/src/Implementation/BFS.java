@@ -1,41 +1,45 @@
 package Implementation;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 import Info.Vertex;
 import Logic.Graph;
 
 public class BFS {
-	public Set<Vertex> reachables(Graph graph, Vertex v) {
+	public static Set<Vertex> reachables(Graph graph) {
 		Set<Vertex> reach = new HashSet<>();
 		Set<Vertex> control = new HashSet<>();
-		ArrayList<Vertex> pending = new ArrayList<>();
-		pending.add(v);
-		control.add(v);
-		
-		while(pending.size()!=0) {
-			Vertex vertex = pending.get(0);
-			reach.add(vertex);
-			pending.remove(0);
+		Queue<Vertex> pending = new LinkedList<>();
+		if(graph.size()!=0) {
+			Vertex v = graph.getGraph().get(0);
+			pending.add(v);
+			control.add(v);
 			
-			for (Vertex ver : graph.getEdges(vertex) ) {
-				if(!control.contains(ver)) {
-					pending.add(ver);
-					control.add(ver);
+			while(pending.size()!=0) {
+				Vertex vertex = pending.poll();
+				reach.add(vertex);
+				//pending.remove(vertex);
+				
+				for (Vertex ver : vertex.getEdges() ) {
+					if(!control.contains(ver)) {
+						pending.add(ver);
+						control.add(ver);
+					}
 				}
 			}
 		}
 		return reach;
 	}
 	
-	public boolean isConnected(Graph graph) {
+	public static boolean isConnected(Graph graph) {
 		if(graph.size()==0) {
 			return false;
 		}
 		else {
-			Set<Vertex> set = reachables(graph,graph.getGraph().get(0));
+			Set<Vertex> set = reachables(graph);
 			if(set.size() == graph.size()) {
 				return true;
 			}

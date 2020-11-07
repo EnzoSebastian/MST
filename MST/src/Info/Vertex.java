@@ -24,6 +24,10 @@ public class Vertex {
 		return allEdges;
 	}
 	
+	public void cleanEdges() {
+		edges = new HashMap<Vertex,Integer>();
+	}
+	
 	public int getEdgeSimilarityIndex(Vertex v) {
 		return edges.get(v);
 	}
