@@ -29,20 +29,20 @@ public class MST {
 			Vertex to = null;
 			for(Vertex vert: vertex) {
 				Iterator<Vertex> it = vert.getEdges().iterator();
+				Vertex vertex2 = it.next();
 				while(it.hasNext()) {
-					Vertex vertex2 = it.next();
+					if(vertex.contains(vertex2)) {
+						it.next();
+						continue;
+					}
 					if(from == null) {
 						from = vert;
-						if(vertex.contains(vertex2)) {
-							it.next();
-						}
-						else if(to == null && !vertex.contains(vertex2)) {
+						if(to == null) {
 							to = vertex2;
 						}
 						else {
 							if(from == vert) {
-								if(from.getEdgeSimilarityIndex(vertex2) < from.getEdgeSimilarityIndex(to) 
-										) {
+								if(from.getEdgeSimilarityIndex(vertex2) < from.getEdgeSimilarityIndex(to)) {
 									to = vertex2;
 								}
 							}
@@ -70,6 +70,7 @@ public class MST {
 				}
 			}
 			copy.getGraph().add(from);
+			vertex.add(to);
 			int index = copy.getGraph().indexOf(from);
 			copy.getGraph().get(index).setEdgeSimilarityIndex(to);
 		}
