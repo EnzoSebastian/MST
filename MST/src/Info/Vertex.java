@@ -29,6 +29,18 @@ public class Vertex {
 		return allEdges;
 	}
 	
+	public void cleanEdges() {
+		this.edges.clear();
+	}
+	
+	public int indexOf(Vertex v) {
+		return getEdges().indexOf(v);
+	}
+	
+	public void removeEdge(int i) {
+		getEdges().remove(i);
+	}
+	
 	public int getEdgeSimilarityIndex(Vertex v) {
 		if(this.edges.containsKey(v)) {
 			return edges.get(v);
@@ -36,6 +48,10 @@ public class Vertex {
 		else {
 			throw new IllegalArgumentException("El vertice no se relaciona con el vertice pasado.");
 		}
+	}
+	
+	public int calculateEdgeSimilarity(Vertex v) {
+		return calculateEdgeSimilarityIndex(v);
 	}
 	
 	public void setEdgeSimilarityIndex(Vertex v) {

@@ -9,29 +9,29 @@ import Info.Vertex;
 import Logic.Graph;
 
 public class MST {
-	public static ArrayList<Vertex> minimumSpanningTree(Graph graph) {
+	public static Graph prim(Graph graph) {
 		if(graph.size()!=0) {
-			return prim(graph);
+			return primImplementation(graph);
 		}
 		else {
 			throw new IllegalArgumentException("No se puede conseguir el AGM de un grafo vacio.");
 		}
 	}
 
-	private static ArrayList<Vertex> prim(Graph graph) {
+	private static Graph primImplementation(Graph graph) {
 		Set<Vertex> vertex = new HashSet<Vertex>();
-		vertex.add(graph.getGraph().get(0));
-		Graph copy = new Graph();
+		ArrayList<Vertex> copy = graph.cleanGraph();
+		vertex.add(copy.get(0));
+		Graph primTree = new Graph();
 		int i = 1;
-		while(i <= graph.size()-1) {
+		while(i < copy.size()) {
 			Vertex from = null;
 			Vertex to = null;
 			for(Vertex vert: vertex) {
-				Iterator<Vertex> it = vert.getEdges().iterator();
-				Vertex vertex2 = it.next();
+				Iterator<Vertex> it = copy.iterator();
 				while(it.hasNext()) {
+					Vertex vertex2 = it.next();
 					if(vertex.contains(vertex2)) {
-						it.next();
 						continue;
 					}
 					if(from == null) {
@@ -41,12 +41,12 @@ public class MST {
 						}
 						else {
 							if(from == vert) {
-								if(from.getEdgeSimilarityIndex(vertex2) < from.getEdgeSimilarityIndex(to)) {
+								if(from.calculateEdgeSimilarity(vertex2) < from.calculateEdgeSimilarity(to)) {
 									to = vertex2;
 								}
 							}
 							else {
-								if(vert.getEdgeSimilarityIndex(vertex2) < from.getEdgeSimilarityIndex(to)) {
+								if(vert.calculateEdgeSimilarity(vertex2) < from.calculateEdgeSimilarity(to)) {
 									from = vert;
 									to = vertex2;
 								}
@@ -55,12 +55,12 @@ public class MST {
 					}
 					else {
 						if(from == vert) {
-							if(from.getEdgeSimilarityIndex(vertex2) < from.getEdgeSimilarityIndex(to)) {
+							if(from.calculateEdgeSimilarity(vertex2) < from.calculateEdgeSimilarity(to)) {
 								to = vertex2;
 							}
 						}
 						else {
-							if(vert.getEdgeSimilarityIndex(vertex2) < from.getEdgeSimilarityIndex(to)) {
+							if(vert.calculateEdgeSimilarity(vertex2) < from.calculateEdgeSimilarity(to)) {
 								from = vert;
 								to = vertex2;
 							}
@@ -69,14 +69,21 @@ public class MST {
 				}
 			}
 			vertex.add(to);
-			addVertex(copy, from, to);
+			addVertex(primTree, from, to);
+			i++;
 		}
-		return copy.getGraph();
+		return primTree;
 	}
 
 	private static void addVertex(Graph copy, Vertex from, Vertex to) {
-		copy.getGraph().add(from);
-		int index = copy.getGraph().indexOf(from);
-		copy.getGraph().get(index).setEdgeSimilarityIndex(to);
+		ArrayList<Vertex> graph = copy.getGraph();
+		if(!graph.contains(from)) {
+			graph.add(from);
+		}
+		if(!graph.contains(to)) {
+			graph.add(to);
+		}
+		int index = graph.indexOf(from);
+		graph.get(index).setEdgeSimilarityIndex(to);
 	}
 }

@@ -21,7 +21,6 @@ public class BFS {
 			while(pending.size()!=0) {
 				Vertex vertex = pending.poll();
 				reach.add(vertex);
-				//pending.remove(vertex);
 				
 				for (Vertex ver : vertex.getEdges() ) {
 					if(!control.contains(ver)) {
