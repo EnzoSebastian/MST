@@ -68,11 +68,15 @@ public class MST {
 					}
 				}
 			}
-			copy.getGraph().add(from);
 			vertex.add(to);
-			int index = copy.getGraph().indexOf(from);
-			copy.getGraph().get(index).setEdgeSimilarityIndex(to);
+			addVertex(copy, from, to);
 		}
 		return copy.getGraph();
+	}
+
+	private static void addVertex(Graph copy, Vertex from, Vertex to) {
+		copy.getGraph().add(from);
+		int index = copy.getGraph().indexOf(from);
+		copy.getGraph().get(index).setEdgeSimilarityIndex(to);
 	}
 }

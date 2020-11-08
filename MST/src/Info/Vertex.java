@@ -3,11 +3,16 @@ package Info;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
+import Validations.Validations;
+
 public class Vertex {
 	private Person person;
 	private HashMap<Vertex,Integer> edges;
 	
 	public Vertex(Person p) {
+		Validations.isNull(p);
 		this.person = p;
 		this.edges = new HashMap<>();
 	}
@@ -24,12 +29,13 @@ public class Vertex {
 		return allEdges;
 	}
 	
-	public void cleanEdges() {
-		edges = new HashMap<Vertex,Integer>();
-	}
-	
 	public int getEdgeSimilarityIndex(Vertex v) {
-		return edges.get(v);
+		if(this.edges.containsKey(v)) {
+			return edges.get(v);
+		}
+		else {
+			throw new IllegalArgumentException("El vertice no se relaciona con el vertice pasado.");
+		}
 	}
 	
 	public void setEdgeSimilarityIndex(Vertex v) {

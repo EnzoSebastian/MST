@@ -35,10 +35,7 @@ public class BFS {
 	}
 	
 	public static boolean isConnected(Graph graph) {
-		if(graph.size()==0) {
-			return false;
-		}
-		else {
+		if(graph.size() != 0) {
 			Set<Vertex> set = reachables(graph);
 			if(set.size() == graph.size()) {
 				return true;
