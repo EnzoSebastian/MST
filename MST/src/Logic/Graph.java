@@ -52,11 +52,11 @@ public class Graph {
 				if(v.getEdgeSimilarityIndex(v2) > i) {
 					from = v;
 					to = v2;
+					i = v.getEdgeSimilarityIndex(v2);
 				}
 			}
 		}
-		int index = from.indexOf(to);
-		from.removeEdge(index);
+		from.removeEdge(to);
 	}
 	
 }

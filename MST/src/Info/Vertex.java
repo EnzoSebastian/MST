@@ -3,7 +3,6 @@ package Info;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
 
 import Validations.Validations;
 
@@ -33,12 +32,8 @@ public class Vertex {
 		this.edges.clear();
 	}
 	
-	public int indexOf(Vertex v) {
-		return getEdges().indexOf(v);
-	}
-	
-	public void removeEdge(int i) {
-		getEdges().remove(i);
+	public void removeEdge(Vertex v) {
+		edges.remove(v);
 	}
 	
 	public int getEdgeSimilarityIndex(Vertex v) {

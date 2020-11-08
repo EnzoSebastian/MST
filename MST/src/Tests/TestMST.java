@@ -38,6 +38,7 @@ public class TestMST {
 	public void MST() {
 		Graph newer = MST.prim(graph);
 		ArrayList<Vertex> mst = newer.getGraph();
+		System.out.println("Arbol generador minimo: ");
 		for(int i = 0;i < mst.size()-1;i++) {
 			Vertex v = mst.get(i);
 			if(v.getEdges().size()!=0) {
@@ -59,6 +60,7 @@ public class TestMST {
 		Graph newer = MST.prim(graph);
 		newer.removeBiggerEdge();
 		ArrayList<Vertex> mst = newer.getGraph();
+		System.out.println("Arbol generador minimo sin arista mas grande: ");
 		for(int i = 0;i < mst.size()-1;i++) {
 			Vertex v = mst.get(i);
 			if(v.getEdges().size()!=0) {
