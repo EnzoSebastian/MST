@@ -2,7 +2,7 @@ package Tests;
 
 import static org.junit.Assert.*;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +31,8 @@ public class TestBFS {
 
 	@Test
 	public void bfs() {
-		Set<Vertex> set = BFS.reachables(graph);
-		assertEquals(3,set.size());
+		ArrayList<Vertex> array = BFS.reachables(graph);
+		assertEquals(3,array.size());
 	}
 	
 	@Test

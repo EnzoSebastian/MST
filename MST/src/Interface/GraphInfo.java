@@ -20,15 +20,16 @@ import java.awt.event.MouseEvent;
 public class GraphInfo extends JFrame {
 
 	private JPanel contentPane;
-	private Graph graph;
 	private int width;
 	private int height;
 	private DisplayMode mode;
+	private Graph graphN;
 
 	/**
 	 * Create the frame.
 	 */
-	public GraphInfo() {
+	public GraphInfo(Graph graph) {
+		graphN = graph;
 		width = 468;
 		height = 350;
 		mode = this.getGraphicsConfiguration().getDevice().getDisplayMode();
@@ -39,13 +40,12 @@ public class GraphInfo extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		graph = new Graph();
 		
 		JButton btnNewButton = new JButton("Agregar Persona");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PersonCreation person = new PersonCreation(graph);
+				PersonCreation person = new PersonCreation(graphN);
 				person.setVisible(true);
 			}
 		});

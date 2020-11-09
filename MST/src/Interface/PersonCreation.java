@@ -146,5 +146,15 @@ public class PersonCreation extends JFrame {
 		});
 		btnNewButton.setBounds(127, 227, 143, 23);
 		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
+		btnNewButton_1.setBounds(10, 227, 89, 23);
+		contentPane.add(btnNewButton_1);
 	}
 }

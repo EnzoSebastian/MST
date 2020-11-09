@@ -43,7 +43,7 @@ public class Graph {
 		return copy;
 	}
 	
-	public void removeBiggerEdge(){
+	public Vertex removeBiggerEdge(){
 		Vertex from = null;
 		Vertex to = null;
 		int i = -1;
@@ -57,6 +57,7 @@ public class Graph {
 			}
 		}
 		from.removeEdge(to);
+		return to;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package Implementation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -9,8 +10,8 @@ import Info.Vertex;
 import Logic.Graph;
 
 public class BFS {
-	public static Set<Vertex> reachables(Graph graph) {
-		Set<Vertex> reach = new HashSet<>();
+	public static ArrayList<Vertex> reachables(Graph graph) {
+		ArrayList<Vertex> reach = new ArrayList<>();
 		Set<Vertex> control = new HashSet<>();
 		Queue<Vertex> pending = new LinkedList<>();
 		if(graph.size()!=0) {
@@ -35,7 +36,7 @@ public class BFS {
 	
 	public static boolean isConnected(Graph graph) {
 		if(graph.size() != 0) {
-			Set<Vertex> set = reachables(graph);
+			ArrayList<Vertex> set = reachables(graph);
 			if(set.size() == graph.size()) {
 				return true;
 			}

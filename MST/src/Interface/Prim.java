@@ -12,6 +12,8 @@ import Info.Vertex;
 import Logic.Graph;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class Prim extends JFrame {
@@ -20,6 +22,7 @@ public class Prim extends JFrame {
 	private int width;
 	private int height;
 	private DisplayMode mode;
+	private Graph graphPrim;
 
 
 	/**
@@ -31,12 +34,21 @@ public class Prim extends JFrame {
 		mode = this.getGraphicsConfiguration().getDevice().getDisplayMode();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds((mode.getWidth()/2)-(width/2), (mode.getHeight()/2)-(height/2), width, height);
+		setUndecorated(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Quitar mayor arista");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SplitEdges edges = new SplitEdges(graphPrim,graph);
+				edges.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnNewButton.setBounds(137, 266, 162, 34);
 		contentPane.add(btnNewButton);
 		
@@ -46,11 +58,11 @@ public class Prim extends JFrame {
 		scroll.setBounds(23, 11, 405, 236);
 		contentPane.add(scroll);
 		
-		prim(graph,textArea);
+		graphPrim = prim(graph,textArea);
 		
 	}
 	
-	private void prim(Graph graph,JTextArea textArea) {
+	private Graph prim(Graph graph,JTextArea textArea) {
 		Graph primImplemented = MST.prim(graph);
 		String st = "";
 		for(int i = 0;i < primImplemented.getGraph().size()-1;i++) {
@@ -63,6 +75,7 @@ public class Prim extends JFrame {
 			}
 		}
 		textArea.setText(st);
+		return primImplemented;
 	}
 
 }

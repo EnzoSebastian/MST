@@ -4,6 +4,9 @@ package Interface;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logic.Graph;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.DisplayMode;
@@ -40,7 +43,7 @@ public class Interface extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GraphInfo graph = new GraphInfo();
+				GraphInfo graph = new GraphInfo(new Graph());
 				graph.setVisible(true);
 				setVisible(false);
 			}
